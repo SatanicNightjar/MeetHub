@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { Box, Button, FormControl, FormLabel, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Textarea } from '@chakra-ui/react';
 import { DatePicker } from '@orange_digital/chakra-datepicker';
-import { getDatabase, ref, set } from "firebase/database";
 import { UserContext } from '../providers/UserProvider';
+import { db } from '../services/firebase';
+import { collection, doc, setDoc } from '@firebase/firestore';
 
 
 // Titel, desc, datum, creator, number of people? (min max),
@@ -19,8 +20,7 @@ export const CreatePage = () => {
     const user = useContext(UserContext);
 
     const saveEvent = (event: object) => {
-        const db = getDatabase();
-        set(ref(db, 'users/' + user?.uid + '/events'), event);
+        setDoc(doc(collection(db, 'users', user!.uid, 'events')), event);
     }
 
     return (
