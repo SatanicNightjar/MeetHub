@@ -1,7 +1,5 @@
-import React, { useEffect, useContext, useState } from 'react';
 //import './Login.css'
 import { signInWithGoogle } from './services/firebase';
-import { UserContext } from './providers/UserProvider';
 //import { Redirect } from 'react-router-dom';
 
 export default function Login() {

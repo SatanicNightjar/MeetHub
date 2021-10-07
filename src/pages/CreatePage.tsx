@@ -1,9 +1,7 @@
 import React, { useContext } from 'react';
-import { Box, Button, FormControl, FormLabel, HStack, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Stack, Textarea } from '@chakra-ui/react';
+import { Box, Button, FormControl, FormLabel, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Stack, Textarea } from '@chakra-ui/react';
 import { DatePicker } from '@orange_digital/chakra-datepicker';
 import { UserContext } from '../providers/UserProvider';
-import { db } from '../services/firebase';
-import { collection, doc, setDoc } from '@firebase/firestore';
 import { saveEvent } from '../services/database';
 
 
@@ -11,7 +9,7 @@ import { saveEvent } from '../services/database';
 export const CreatePage = () => {
 
     const [title, setTitle] = React.useState('');
-    const [description, setDescription] = React.useState('');
+    const [description, ] = React.useState('');
     const [date, setDate] = React.useState(new Date());
     const [creator, setCreator] = React.useState('');
     const [numberOfPeopleMin, setNumberOfPeopleMin] = React.useState(0);
@@ -23,7 +21,11 @@ export const CreatePage = () => {
         <div>
             <h1>Create Page</h1>
             <Box borderWidth='1px' borderRadius='lg' padding='2'>
-                <form onSubmit={(event) => {event.preventDefault();console.log(event)}}>
+                <form 
+                    onSubmit={(event) => {
+                        event.preventDefault();
+                        user && saveEvent(user, {title: title, description: description, date: date, creator: creator, numberOfPeopleMin: numberOfPeopleMin, numberOfPeopleMax: numberOfPeopleMax});
+                    }}>
 
                     <FormControl isRequired id="createEvent" >
                         <FormLabel>Title</FormLabel>
