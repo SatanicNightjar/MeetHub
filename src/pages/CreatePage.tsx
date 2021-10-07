@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
-import { Box, Button, FormControl, FormLabel, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Stack, Textarea } from '@chakra-ui/react';
+import React, { useContext, useEffect } from 'react';
+import { Box, Button, Center, FormControl, FormLabel, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Stack, Textarea } from '@chakra-ui/react';
 import { DatePicker } from '@orange_digital/chakra-datepicker';
 import { UserContext } from '../providers/UserProvider';
-import { getAllEvents, getOwnEvents, saveEvent } from '../services/database';
+import { getAllEvents, getOwnEvents, listenAllEvents, saveEvent } from '../services/database';
+import { Login } from '../Login';
 
 
 // Titel, desc, datum, creator, number of people? (min max),
@@ -17,10 +18,17 @@ export const CreatePage = () => {
 
     const user = useContext(UserContext);
 
+    useEffect(() => {
+        listenAllEvents(e => {
+            console.log('Listening on events...', e.docs.map(d => d.data()));
+        })
+    }, [])
+
     return (
         <div>
             <h1>Create Page</h1>
             <Box borderWidth='1px' borderRadius='lg' padding='2'>
+                {user ? 
                 <form 
                     onSubmit={(event) => {
                         event.preventDefault();
@@ -65,6 +73,16 @@ export const CreatePage = () => {
                         </Button>
                     </FormControl>
                 </form>
+    : <div>
+        <Center>
+            <Box padding='5em'>
+                <Stack>
+                    <h1>Please login to create an event</h1>
+                    <Login />
+                </Stack>
+            </Box>
+        </Center>
+    </div>}
 
             </Box>
             <Button

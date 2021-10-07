@@ -1,12 +1,13 @@
 import React from 'react';
 import './App.css';
-import Login from './Login';
+import { Login } from './Login';
 import { UserProvider } from './providers/UserProvider';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import { MainPage } from './pages/MainPage';
 import { logOut } from './services/firebase';
 import { Box, ChakraProvider, extendTheme, Heading, ThemeConfig } from "@chakra-ui/react"
 import { CreatePage } from './pages/CreatePage';
+import { Debug } from './components/Debug';
 
 const config: ThemeConfig = {
   initialColorMode: "dark",
@@ -29,12 +30,10 @@ function App() {
               <Route path='/' component={MainPage}/>
             </Switch>
           </HashRouter>
-          <MainPage/>
-          <Login />
-            <button onClick={logOut}>
-              Logout
-            </button>
+          
         </Box>
+
+        <Debug />
       </UserProvider>
     </ChakraProvider>
   );
