@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/MeetHub/static/css/main.a617e044.chunk.css",
-    "main.js": "/MeetHub/static/js/main.dfc36e91.chunk.js",
-    "main.js.map": "/MeetHub/static/js/main.dfc36e91.chunk.js.map",
-    "runtime-main.js": "/MeetHub/static/js/runtime-main.6d570efe.js",
-    "runtime-main.js.map": "/MeetHub/static/js/runtime-main.6d570efe.js.map",
-    "static/js/2.c3cd8b77.chunk.js": "/MeetHub/static/js/2.c3cd8b77.chunk.js",
-    "static/js/2.c3cd8b77.chunk.js.map": "/MeetHub/static/js/2.c3cd8b77.chunk.js.map",
-    "static/js/3.9d406bc6.chunk.js": "/MeetHub/static/js/3.9d406bc6.chunk.js",
-    "static/js/3.9d406bc6.chunk.js.map": "/MeetHub/static/js/3.9d406bc6.chunk.js.map",
+    "main.js": "/MeetHub/static/js/main.a3fc370c.chunk.js",
+    "main.js.map": "/MeetHub/static/js/main.a3fc370c.chunk.js.map",
+    "runtime-main.js": "/MeetHub/static/js/runtime-main.fb524e2d.js",
+    "runtime-main.js.map": "/MeetHub/static/js/runtime-main.fb524e2d.js.map",
+    "static/js/2.795696d2.chunk.js": "/MeetHub/static/js/2.795696d2.chunk.js",
+    "static/js/2.795696d2.chunk.js.map": "/MeetHub/static/js/2.795696d2.chunk.js.map",
+    "static/js/3.b056fd48.chunk.js": "/MeetHub/static/js/3.b056fd48.chunk.js",
+    "static/js/3.b056fd48.chunk.js.map": "/MeetHub/static/js/3.b056fd48.chunk.js.map",
     "index.html": "/MeetHub/index.html",
     "static/css/main.a617e044.chunk.css.map": "/MeetHub/static/css/main.a617e044.chunk.css.map",
-    "static/js/2.c3cd8b77.chunk.js.LICENSE.txt": "/MeetHub/static/js/2.c3cd8b77.chunk.js.LICENSE.txt"
+    "static/js/2.795696d2.chunk.js.LICENSE.txt": "/MeetHub/static/js/2.795696d2.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.6d570efe.js",
-    "static/js/2.c3cd8b77.chunk.js",
+    "static/js/runtime-main.fb524e2d.js",
+    "static/js/2.795696d2.chunk.js",
     "static/css/main.a617e044.chunk.css",
-    "static/js/main.dfc36e91.chunk.js"
+    "static/js/main.a3fc370c.chunk.js"
   ]
 }
