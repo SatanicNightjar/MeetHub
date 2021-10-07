@@ -5,25 +5,22 @@ import { UserProvider } from './providers/UserProvider';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import { MainPage } from './pages/MainPage';
 import { logOut } from './services/firebase';
-import { Box, ChakraProvider, extendTheme, Heading } from "@chakra-ui/react"
+import { Box, ChakraProvider, extendTheme, Heading, ThemeConfig } from "@chakra-ui/react"
 import { CreatePage } from './pages/CreatePage';
 
-const colors = {
-  brand: {
-    900: "#1a365d",
-    800: "#153e75",
-    700: "#2a69ac",
-  }
+const config: ThemeConfig = {
+  initialColorMode: "dark",
+  useSystemColorMode: true,
 }
 
-const theme = extendTheme({ colors });
+const theme = extendTheme({ config });
 
 function App() {
 
   return (
     <ChakraProvider theme={theme}>
       <UserProvider>
-        <Box w='100%' padding='0 20% 0 20%'>
+        <Box w='100%' padding='5em 20% 5em 20%'>
         <Heading orientation='horizontal'>MeetHub</Heading>
         
           <HashRouter>
