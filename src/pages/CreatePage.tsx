@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Box, Button, FormControl, FormLabel, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Textarea } from '@chakra-ui/react';
+import { Box, Button, FormControl, FormLabel, HStack, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Textarea } from '@chakra-ui/react';
 import { DatePicker } from '@orange_digital/chakra-datepicker';
 import { getDatabase, ref, set } from "firebase/database";
 import { UserContext } from '../providers/UserProvider';
@@ -12,7 +12,6 @@ export const CreatePage = () => {
     const [description, setDescription] = React.useState('');
     const [date, setDate] = React.useState(new Date());
     const [creator, setCreator] = React.useState('');
-    const [numberOfPeople, setNumberOfPeople] = React.useState(0);
     const [numberOfPeopleMin, setNumberOfPeopleMin] = React.useState(0);
     const [numberOfPeopleMax, setNumberOfPeopleMax] = React.useState(0);
 
@@ -30,21 +29,29 @@ export const CreatePage = () => {
                 <form onSubmit={(event) => {event.preventDefault();console.log(event)}}>
 
                     <FormControl isRequired id="createEvent" >
-                        <FormLabel>Titel</FormLabel>
-                        <Input type="text" />
+                        <FormLabel>Title</FormLabel>
+                        <Input type="text" onChange={(event) => setTitle(event.target.value)}/>
                         <FormLabel>Description</FormLabel>
-                        <Textarea />
+                        <Textarea onChange={(event) => setTitle(event.target.value)}/>
                         <FormLabel>Date</FormLabel>
-                        <DatePicker initialValue={new Date()} />
+                        <DatePicker initialValue={new Date()} onDateChange={(date) => date && setDate(date)}/>
                         <FormLabel>Creator</FormLabel>
-                        <Input type="text" />
+                        <Input type="text" onChange={(event) => setCreator(event.target.value)}/>
                         <FormLabel>Number of people</FormLabel>
                         <NumberInput defaultValue={10} min={2} max={100}>
-                            <NumberInputField />
-                            <NumberInputStepper>
-                                <NumberIncrementStepper />
-                                <NumberDecrementStepper />
-                            </NumberInputStepper>
+                            <HStack>
+                                <NumberInputField onChange={(event) => setNumberOfPeopleMin(+event.target.value)}/>
+                                <NumberInputStepper>
+                                    <NumberIncrementStepper />
+                                    <NumberDecrementStepper />
+                                </NumberInputStepper>
+                                <NumberInputField onChange={(event) => setNumberOfPeopleMin(+event.target.value)}/>
+                                <NumberInputStepper>
+                                    <NumberIncrementStepper />
+                                    <NumberDecrementStepper />
+                                </NumberInputStepper>
+
+                            </HStack>
                         </NumberInput>
                         <Button
                             mt={4}
