@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
-import { Box, Button, FormControl, FormLabel, HStack, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Textarea } from '@chakra-ui/react';
+import { Box, Button, FormControl, FormLabel, HStack, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Stack, Textarea } from '@chakra-ui/react';
 import { DatePicker } from '@orange_digital/chakra-datepicker';
 import { UserContext } from '../providers/UserProvider';
 import { db } from '../services/firebase';
 import { collection, doc, setDoc } from '@firebase/firestore';
+import { saveEvent } from '../services/database';
 
 
 // Titel, desc, datum, creator, number of people? (min max),
@@ -17,10 +18,6 @@ export const CreatePage = () => {
     const [numberOfPeopleMax, setNumberOfPeopleMax] = React.useState(0);
 
     const user = useContext(UserContext);
-
-    const saveEvent = (event: object) => {
-        setDoc(doc(collection(db, 'users', user!.uid, 'events')), event);
-    }
 
     return (
         <div>
@@ -38,21 +35,24 @@ export const CreatePage = () => {
                         <FormLabel>Creator</FormLabel>
                         <Input type="text" onChange={(event) => setCreator(event.target.value)}/>
                         <FormLabel>Number of people</FormLabel>
+                        
+                        <Stack isInline>
                         <NumberInput defaultValue={10} min={2} max={100}>
-                            <HStack>
-                                <NumberInputField onChange={(event) => setNumberOfPeopleMin(+event.target.value)}/>
-                                <NumberInputStepper>
-                                    <NumberIncrementStepper />
-                                    <NumberDecrementStepper />
-                                </NumberInputStepper>
-                                <NumberInputField onChange={(event) => setNumberOfPeopleMin(+event.target.value)}/>
-                                <NumberInputStepper>
-                                    <NumberIncrementStepper />
-                                    <NumberDecrementStepper />
-                                </NumberInputStepper>
-
-                            </HStack>
+                            <NumberInputField onChange={(event) => setNumberOfPeopleMin(+event.target.value)}/>
+                            <NumberInputStepper>
+                                <NumberIncrementStepper />
+                                <NumberDecrementStepper />
+                            </NumberInputStepper>
                         </NumberInput>
+                        <NumberInput defaultValue={10} min={2} max={100}>
+                            <NumberInputField onChange={(event) => setNumberOfPeopleMax(+event.target.value)}/>
+                            <NumberInputStepper>
+                                <NumberIncrementStepper />
+                                <NumberDecrementStepper />
+                            </NumberInputStepper>
+                        </NumberInput>
+                       </Stack>
+                        
                         <Button
                             mt={4}
                             colorScheme="teal"
@@ -68,7 +68,7 @@ export const CreatePage = () => {
                 mt={4}
                 colorScheme="teal"
                 type="submit"
-                onClick={() => saveEvent({
+                onClick={() => saveEvent(user!, {
                     title: 'Test',
                     description: 'Test',
                     date: new Date(),
