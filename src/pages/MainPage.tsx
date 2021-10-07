@@ -1,9 +1,9 @@
-import { Box, Divider, Heading, Stat, StatHelpText, StatLabel, StatNumber } from '@chakra-ui/react';
+import { Box, Divider, Heading, Text } from '@chakra-ui/react';
 import { DocumentData } from 'firebase/firestore';
 import React from 'react';
 import { useEffect } from 'react';
 import { Virtuoso } from 'react-virtuoso';
-import { getAllEvents } from '../services/database';
+import { listenAllEvents } from '../services/database';
 
 
 
@@ -13,7 +13,8 @@ export const MainPage = () => {
     const [events, setEvents] = React.useState<DocumentData[]>([]);
 
     useEffect(() => {
-        getAllEvents().then(events => setEvents(events.docs.map(doc => doc.data())));
+        listenAllEvents(events => setEvents(events.docs.map(doc => doc.data())));
+        //getAllEvents().then(events => setEvents(events.docs.map(doc => doc.data())));
     },[]);
 
 
@@ -29,12 +30,17 @@ export const MainPage = () => {
             <button>Create Event</button>
 
             <h2>Events</h2>
-            <Box height='md' maxHeight='lg'>
+            <Box borderWidth='1px' borderRadius='lg' padding='10' marginTop='10'>
+            
+            {/* {events.map(e => <EventItem event={e} key={e.id}/>)} */}
 
             <Virtuoso
+                style={{
+                    margin: 10
+                }}
                 useWindowScroll
-                height='full'
                 totalCount={events.length}
+
                 itemContent={(index) => <EventItem event={(events[index])}></EventItem>}
             />
             </Box>
@@ -49,16 +55,12 @@ export const EventItem = (event: any) => {
     return (
         <>
         <Divider/>
-        <Stat>
-            {/*<Box w='100%' p='4' color='white'>
-            <Heading size='sm'>{event.event.title}</Heading>
-            <Heading size='xs'>{event.event.description}</Heading>
-            </Box>*/}
-            <StatNumber>{event.event.title}</StatNumber>
-            <StatLabel>{event.event.description}</StatLabel>
-            <StatHelpText>{new Date(event.event.date.seconds * 1000).toLocaleDateString()}</StatHelpText>
-        </Stat>
-
+        <Box>
+            <Heading>{event.event.title}</Heading>
+            <Text>{event.event.description}</Text>
+            <Text>{new Date(event.event.date.seconds * 1000).toLocaleDateString()}</Text>
+        
+        </Box>
         </>
     )
 }
