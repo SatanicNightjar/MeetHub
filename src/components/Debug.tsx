@@ -1,7 +1,9 @@
+import { Button } from '@chakra-ui/button';
 import { Box, Divider } from '@chakra-ui/layout';
 import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../providers/UserProvider';
 import { getAllEvents } from '../services/database';
+import { logOut } from '../services/firebase';
 
 export const Debug = () => {
 
@@ -22,6 +24,9 @@ export const Debug = () => {
             <Divider margin='2em 0 2em 0' />
             <h1>All Events:</h1> <br/>
             {JSON.stringify(allEvents)}
+            <Divider margin='2em 0 2em 0' />
+            <h1>Logout:</h1> <br/>
+            <Button onClick={() => logOut()}>Logout</Button>
         </Box>
     )
 }
