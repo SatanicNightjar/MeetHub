@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/static/css/main.a617e044.chunk.css",
-    "main.js": "/static/js/main.65eb5b58.chunk.js",
-    "main.js.map": "/static/js/main.65eb5b58.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.72b57b73.js",
-    "runtime-main.js.map": "/static/js/runtime-main.72b57b73.js.map",
-    "static/js/2.054ec0a2.chunk.js": "/static/js/2.054ec0a2.chunk.js",
-    "static/js/2.054ec0a2.chunk.js.map": "/static/js/2.054ec0a2.chunk.js.map",
-    "static/js/3.9d406bc6.chunk.js": "/static/js/3.9d406bc6.chunk.js",
-    "static/js/3.9d406bc6.chunk.js.map": "/static/js/3.9d406bc6.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.a617e044.chunk.css.map": "/static/css/main.a617e044.chunk.css.map",
-    "static/js/2.054ec0a2.chunk.js.LICENSE.txt": "/static/js/2.054ec0a2.chunk.js.LICENSE.txt"
+    "main.css": "/MeetHub/static/css/main.a617e044.chunk.css",
+    "main.js": "/MeetHub/static/js/main.d379d377.chunk.js",
+    "main.js.map": "/MeetHub/static/js/main.d379d377.chunk.js.map",
+    "runtime-main.js": "/MeetHub/static/js/runtime-main.6d570efe.js",
+    "runtime-main.js.map": "/MeetHub/static/js/runtime-main.6d570efe.js.map",
+    "static/js/2.011c366c.chunk.js": "/MeetHub/static/js/2.011c366c.chunk.js",
+    "static/js/2.011c366c.chunk.js.map": "/MeetHub/static/js/2.011c366c.chunk.js.map",
+    "static/js/3.9d406bc6.chunk.js": "/MeetHub/static/js/3.9d406bc6.chunk.js",
+    "static/js/3.9d406bc6.chunk.js.map": "/MeetHub/static/js/3.9d406bc6.chunk.js.map",
+    "index.html": "/MeetHub/index.html",
+    "static/css/main.a617e044.chunk.css.map": "/MeetHub/static/css/main.a617e044.chunk.css.map",
+    "static/js/2.011c366c.chunk.js.LICENSE.txt": "/MeetHub/static/js/2.011c366c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.72b57b73.js",
-    "static/js/2.054ec0a2.chunk.js",
+    "static/js/runtime-main.6d570efe.js",
+    "static/js/2.011c366c.chunk.js",
     "static/css/main.a617e044.chunk.css",
-    "static/js/main.65eb5b58.chunk.js"
+    "static/js/main.d379d377.chunk.js"
   ]
 }
