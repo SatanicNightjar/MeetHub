@@ -1,5 +1,6 @@
 {
   "name": "meethub",
+  "homepage": "/MeetHub",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
