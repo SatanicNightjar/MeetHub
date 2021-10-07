@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 
 import { initializeApp } from 'firebase/app'
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
+import { getFirestore } from "firebase/firestore";
 
 dotenv.config();
 initializeApp({
@@ -19,6 +20,8 @@ initializeApp({
 console.log('...........................')
 
 export const auth = getAuth();
+export const db = getFirestore();
+
 const googleProvider = new GoogleAuthProvider()
 export const signInWithGoogle = () => {
   console.log('signInWithGoogle..........')
