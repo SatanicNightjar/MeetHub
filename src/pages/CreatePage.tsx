@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Box, Button, FormControl, FormLabel, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Stack, Textarea } from '@chakra-ui/react';
 import { DatePicker } from '@orange_digital/chakra-datepicker';
 import { UserContext } from '../providers/UserProvider';
-import { saveEvent } from '../services/database';
+import { getAllEvents, getOwnEvents, saveEvent } from '../services/database';
 
 
 // Titel, desc, datum, creator, number of people? (min max),
@@ -71,11 +71,20 @@ export const CreatePage = () => {
                 mt={4}
                 colorScheme="teal"
                 type="submit"
-                onClick={() => saveEvent(user!, {
-                    title: 'Test',
-                    description: 'Test',
-                    date: new Date(),
-                })}
+                onClick={() => {
+                    getOwnEvents(user!).then(events => console.log(events.docs.map(doc => doc.data())));
+                }}
+            >
+                Create Event
+            </Button>
+
+            <Button
+                mt={4}
+                colorScheme="teal"
+                type="submit"
+                onClick={() => {
+                    getAllEvents().then(events => console.log(events.docs.map(doc => doc.data())));
+                }}
             >
                 Create Event
             </Button>

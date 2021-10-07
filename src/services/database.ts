@@ -1,5 +1,5 @@
 import { User } from "firebase/auth";
-import { collection, collectionGroup, doc, setDoc, onSnapshot } from "firebase/firestore";
+import { collection, collectionGroup, doc, setDoc, getDocs, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "./firebase";
 
 export const saveEvent = (user: User, event: object) => {
@@ -7,11 +7,12 @@ export const saveEvent = (user: User, event: object) => {
 }
 
 export const getOwnEvents = (user: User) => {
-    return collection(db, 'users', user.uid, 'events');
+    return getDocs(query(collection(db, 'users', user.uid, 'events'), orderBy('date')));
 }
 
 export const getAllEvents = () => {
-    return collectionGroup(db, 'events');
+    //return getDocs(query(collectionGroup(db, 'events'), orderBy('date')));
+    return getDocs(collectionGroup(db, 'events')); // replace by the line above once index is built
 }
 
 export const listenAllEvents = (callback: (event: object) => void) => (
