@@ -42,7 +42,7 @@ export const CreatePage = () => {
                         <FormLabel>Description</FormLabel>
                         <Textarea onChange={(event) => setDescription(event.target.value)}/>
                         <FormLabel>Date</FormLabel>
-                        <DatePicker initialValue={new Date()} onDateChange={(date) => date && setDate(date)}/>
+                        <DatePicker initialValue={new Date()} onDateChange={value => value && setDate(value)}/>
                         <FormLabel>Creator</FormLabel>
                         <Input type="text" onChange={(event) => setCreator(event.target.value)}/>
                         <FormLabel>Number of people</FormLabel>
