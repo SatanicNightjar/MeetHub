@@ -26,7 +26,7 @@ function App() {
         
           <HashRouter>
             <Switch>
-              <Route path='/' component={CreatePage} />
+              <Route path='/create' component={CreatePage} />
               <Route path='/' component={MainPage}/>
             </Switch>
           </HashRouter>

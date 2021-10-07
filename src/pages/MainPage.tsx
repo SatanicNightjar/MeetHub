@@ -1,4 +1,4 @@
-import { Box, Heading, Stat, StatHelpText, StatLabel, StatNumber } from '@chakra-ui/react';
+import { Box, Divider, Heading, Stat, StatHelpText, StatLabel, StatNumber } from '@chakra-ui/react';
 import { DocumentData } from 'firebase/firestore';
 import React, { useContext } from 'react';
 import { useEffect } from 'react';
@@ -33,6 +33,7 @@ export const MainPage = () => {
             <Box height='md' maxHeight='lg'>
 
             <Virtuoso
+                useWindowScroll
                 height='full'
                 totalCount={events.length}
                 itemContent={(index) => <EventItem event={(events[index])}></EventItem>}
@@ -47,6 +48,8 @@ export const MainPage = () => {
 type event = {title: string, description: string, date: Date, location: string, image: string}
 export const EventItem = (event: any) => {
     return (
+        <>
+        <Divider/>
         <Stat>
             {/*<Box w='100%' p='4' color='white'>
             <Heading size='sm'>{event.event.title}</Heading>
@@ -56,6 +59,8 @@ export const EventItem = (event: any) => {
             <StatLabel>{event.event.description}</StatLabel>
             <StatHelpText>{new Date(event.event.date.seconds * 1000).toLocaleDateString()}</StatHelpText>
         </Stat>
+
+        </>
     )
 }
 
