@@ -1,16 +1,15 @@
 import { Box, Divider, Heading, Stat, StatHelpText, StatLabel, StatNumber } from '@chakra-ui/react';
 import { DocumentData } from 'firebase/firestore';
-import React, { useContext } from 'react';
+import React from 'react';
 import { useEffect } from 'react';
 import { Virtuoso } from 'react-virtuoso';
-import { UserContext } from '../providers/UserProvider';
 import { getAllEvents } from '../services/database';
 
 
 
 export const MainPage = () => {
 
-    const user = useContext(UserContext);
+    //const user = useContext(UserContext);
     const [events, setEvents] = React.useState<DocumentData[]>([]);
 
     useEffect(() => {
@@ -45,7 +44,7 @@ export const MainPage = () => {
     )
 }
 
-type event = {title: string, description: string, date: Date, location: string, image: string}
+//type event = {title: string, description: string, date: Date, location: string, image: string}
 export const EventItem = (event: any) => {
     return (
         <>
