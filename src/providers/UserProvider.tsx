@@ -8,7 +8,6 @@ export const UserProvider: React.FC = ({ children }) => {
     const [user, setUser] = useState<User | null>(null)
     useEffect(() => {
         onAuthStateChanged(auth, async (_user: User | null) => {
-            console.log('IP:', _user)
             setUser(_user)
         })
     }, [])

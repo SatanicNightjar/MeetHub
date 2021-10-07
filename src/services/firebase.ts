@@ -17,14 +17,11 @@ initializeApp({
   measurementId: process.env.REACT_APP_MEASUREMENT_ID
 });
 
-console.log('...........................')
-
 export const auth = getAuth();
 export const db = getFirestore();
 
 const googleProvider = new GoogleAuthProvider()
 export const signInWithGoogle = () => {
-  console.log('signInWithGoogle..........')
   return signInWithPopup(auth, googleProvider).catch((error) => {
     console.log(error.message);
   })
@@ -32,7 +29,6 @@ export const signInWithGoogle = () => {
 
 export const logOut = () => {
   signOut(auth).then(()=> {
-    console.log('logged out')
   }).catch((error) => {
     console.log(error.message)
   })

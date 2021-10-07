@@ -3,7 +3,6 @@ import { signInWithGoogle } from './services/firebase';
 //import { Redirect } from 'react-router-dom';
 
 export default function Login() {
-  console.log('Loginnnnnnnnn');
   //const [redirect, setRedirect] = useState(null)
 
   /*useEffect(() => {
