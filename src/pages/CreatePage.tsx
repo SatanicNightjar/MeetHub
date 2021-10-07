@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Box, Button, FormControl, FormLabel, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Stack, Textarea } from '@chakra-ui/react';
 import { DatePicker } from '@orange_digital/chakra-datepicker';
 import { UserContext } from '../providers/UserProvider';
-import { getAllEvents, getOwnEvents, saveEvent } from '../services/database';
+import { getAllEvents, getOwnEvents, listenAllEvents, saveEvent } from '../services/database';
 
 
 // Titel, desc, datum, creator, number of people? (min max),
@@ -16,6 +16,12 @@ export const CreatePage = () => {
     const [numberOfPeopleMax, setNumberOfPeopleMax] = React.useState(10);
 
     const user = useContext(UserContext);
+
+    useEffect(() => {
+        listenAllEvents(e => {
+            console.log('Listening on events...', e.docs.map(d => d.data()));
+        })
+    }, [])
 
     return (
         <div>
