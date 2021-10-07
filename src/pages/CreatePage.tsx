@@ -9,11 +9,11 @@ import { saveEvent } from '../services/database';
 export const CreatePage = () => {
 
     const [title, setTitle] = React.useState('');
-    const [description, ] = React.useState('');
+    const [description, setDescription] = React.useState('');
     const [date, setDate] = React.useState(new Date());
     const [creator, setCreator] = React.useState('');
-    const [numberOfPeopleMin, setNumberOfPeopleMin] = React.useState(0);
-    const [numberOfPeopleMax, setNumberOfPeopleMax] = React.useState(0);
+    const [numberOfPeopleMin, setNumberOfPeopleMin] = React.useState(2);
+    const [numberOfPeopleMax, setNumberOfPeopleMax] = React.useState(10);
 
     const user = useContext(UserContext);
 
@@ -24,6 +24,7 @@ export const CreatePage = () => {
                 <form 
                     onSubmit={(event) => {
                         event.preventDefault();
+                        console.log({title: title, description: description, date: date, creator: creator, numberOfPeopleMin: numberOfPeopleMin, numberOfPeopleMax: numberOfPeopleMax})
                         user && saveEvent(user, {title: title, description: description, date: date, creator: creator, numberOfPeopleMin: numberOfPeopleMin, numberOfPeopleMax: numberOfPeopleMax});
                     }}>
 
@@ -31,7 +32,7 @@ export const CreatePage = () => {
                         <FormLabel>Title</FormLabel>
                         <Input type="text" onChange={(event) => setTitle(event.target.value)}/>
                         <FormLabel>Description</FormLabel>
-                        <Textarea onChange={(event) => setTitle(event.target.value)}/>
+                        <Textarea onChange={(event) => setDescription(event.target.value)}/>
                         <FormLabel>Date</FormLabel>
                         <DatePicker initialValue={new Date()} onDateChange={(date) => date && setDate(date)}/>
                         <FormLabel>Creator</FormLabel>
@@ -39,21 +40,21 @@ export const CreatePage = () => {
                         <FormLabel>Number of people</FormLabel>
                         
                         <Stack isInline>
-                        <NumberInput defaultValue={10} min={2} max={100}>
-                            <NumberInputField onChange={(event) => setNumberOfPeopleMin(+event.target.value)}/>
-                            <NumberInputStepper>
-                                <NumberIncrementStepper />
-                                <NumberDecrementStepper />
-                            </NumberInputStepper>
-                        </NumberInput>
-                        <NumberInput defaultValue={10} min={2} max={100}>
-                            <NumberInputField onChange={(event) => setNumberOfPeopleMax(+event.target.value)}/>
-                            <NumberInputStepper>
-                                <NumberIncrementStepper />
-                                <NumberDecrementStepper />
-                            </NumberInputStepper>
-                        </NumberInput>
-                       </Stack>
+                            <NumberInput defaultValue={2} min={2} max={100}>
+                                <NumberInputField onChange={(event) => setNumberOfPeopleMin(+event.target.value)}/>
+                                <NumberInputStepper>
+                                    <NumberIncrementStepper />
+                                    <NumberDecrementStepper />
+                                </NumberInputStepper>
+                            </NumberInput>
+                            <NumberInput defaultValue={10} min={2} max={100}>
+                                <NumberInputField onChange={(event) => setNumberOfPeopleMax(+event.target.value)}/>
+                                <NumberInputStepper>
+                                    <NumberIncrementStepper />
+                                    <NumberDecrementStepper />
+                                </NumberInputStepper>
+                            </NumberInput>
+                        </Stack>
                         
                         <Button
                             mt={4}
