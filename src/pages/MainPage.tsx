@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Heading, HStack, Icon, Stack, Text } from '@chakra-ui/react';
+import { Box, Divider, Heading, Text } from '@chakra-ui/react';
 import { DocumentData } from 'firebase/firestore';
 import React from 'react';
 import { useEffect } from 'react';
