@@ -20,7 +20,7 @@ function App() {
     <ChakraProvider theme={theme}>
       <UserProvider>
         <Box w='100%' padding='5em 20% 5em 20%'>
-        <Heading orientation='horizontal'>MeetHub</Heading>
+        <Heading size='2xl' orientation='horizontal'>MeetHub</Heading>
         
           <HashRouter>
             <Switch>

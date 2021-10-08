@@ -1,4 +1,4 @@
-import { Box, Divider, Heading, Text } from '@chakra-ui/react';
+import { Box, Button, Divider, Heading, HStack, Icon, Stack, Text } from '@chakra-ui/react';
 import { DocumentData } from 'firebase/firestore';
 import React from 'react';
 import { useEffect } from 'react';
@@ -24,24 +24,17 @@ export const MainPage = () => {
 
     return (
         <div>
-            <Heading size='md'>All Events</Heading>
+            <Heading fontWeight='medium' mt='5' size='lg'>All Events</Heading>
             
-            
-            <button>Create Event</button>
-
-            <h2>Events</h2>
-            <Box borderWidth='1px' borderRadius='lg' padding='10' marginTop='10'>
+            <Box borderWidth='1px' borderRadius='lg' padding='0' marginTop='2'>
             
             {/* {events.map(e => <EventItem event={e} key={e.id}/>)} */}
 
             <Virtuoso
-                style={{
-                    margin: 10
-                }}
                 useWindowScroll
                 totalCount={events.length}
-
-                itemContent={(index) => <EventItem event={(events[index])}></EventItem>}
+                
+                itemContent={(index) => <>{(index !== 0) && <Divider/>}<EventItem event={(events[index])}/></>}
             />
             </Box>
 
@@ -53,18 +46,13 @@ export const MainPage = () => {
 //type event = {title: string, description: string, date: Date, location: string, image: string}
 export const EventItem = (event: any) => {
     return (
-        <>
-        <Divider/>
-        <Box>
-            <Heading>{event.event.title}</Heading>
-            <Text>{event.event.description}</Text>
-            <Text>{new Date(event.event.date.seconds * 1000).toLocaleDateString()}</Text>
-        
+        <Box p={5}>
+            <Text fontFamily={'heading'} fontWeight={700} mb={3} fontSize='md' color={'gray.500'}>{new Date(event.event.date.seconds * 1000).toLocaleDateString()}</Text>
+            <Heading mb={3} fontSize={{base: 'xl', md: '2xl'}}>{event.event.title}</Heading>
+            <Text fontSize={'md'} color={'gray.400'}>{event.event.description}</Text>
         </Box>
-        </>
     )
 }
-
 
 
 
