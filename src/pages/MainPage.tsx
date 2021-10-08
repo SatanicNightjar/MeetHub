@@ -14,13 +14,7 @@ export const MainPage = () => {
 
     useEffect(() => {
         listenAllEvents(events => setEvents(events.docs.map(doc => doc.data())));
-        //getAllEvents().then(events => setEvents(events.docs.map(doc => doc.data())));
     },[]);
-
-
-    useEffect(() => {
-        console.log(events);
-    })
 
     return (
         <div>
