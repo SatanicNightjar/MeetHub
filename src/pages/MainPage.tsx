@@ -17,10 +17,6 @@ export const MainPage = () => {
         listenAllEvents(events => setEvents(events.docs.map(doc => ({...doc.data(), id: doc.id, creatorId: doc.ref.parent.parent?.id}))));
     }, []);
 
-    useEffect(() => {
-        console.log('Events Updated:', events)
-    }, [events])
-
     return (
         <div>
             <Heading fontWeight='medium' mt='5' size='lg'>All Events</Heading>
@@ -51,6 +47,7 @@ export const EventItem = (event: any) => {
 
     const debug = true;
 
+
     return (
         <Box p={5}>
             <Text fontFamily={'heading'} fontWeight={700} mb={3} fontSize='md' color={'gray.500'}>{new Date(event.event.date.seconds * 1000).toLocaleDateString()}</Text>
@@ -69,8 +66,8 @@ export const EventItem = (event: any) => {
                         Interested users: 
                     </Box>
                     {event.event.interested 
-                        ? Object.values(event.event.interested)
-                            .map((user: any) => <Image key={user.uid} src={user.photoURL} rounded='full' boxSize='6'/>) 
+                        ? [...Object.values(event.event.interested)].sort((a:any, b:any) => a.userId.localeCompare(b.userId))
+                            .map((user: any) => <Image key={user.userId} src={user.photoURL} rounded='full' boxSize='6'/>) 
                         : 'None'}
                 </Center>
             </Box>} 
