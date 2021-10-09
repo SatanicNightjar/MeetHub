@@ -1,5 +1,5 @@
 import { AddIcon, MinusIcon } from '@chakra-ui/icons';
-import { Box, Divider, Heading, Text, Image, HStack, IconButton, useBreakpointValue, Popover, PopoverTrigger, PopoverHeader, PopoverContent, PopoverBody, WrapItem, Wrap, PopoverArrow } from '@chakra-ui/react';
+import { Box, Divider, Heading, Text, Image, HStack, IconButton, useBreakpointValue, Popover, PopoverTrigger, PopoverHeader, PopoverContent, PopoverBody, WrapItem, Wrap, PopoverArrow, Stack } from '@chakra-ui/react';
 import { DocumentData } from 'firebase/firestore';
 import React, { useContext, useState } from 'react';
 import { useEffect } from 'react';
@@ -53,11 +53,11 @@ export const EventItem = (event: any) => {
     const userArray = event.event.interested ? [...Object.values(event.event.interested)].sort((a:any, b:any) => a.userId.localeCompare(b.userId)) : []
 
     return (
-        <Box p={5} pt={4} overflow='initial'>
+        <Box p={5} pt={3} overflow='initial'>
             
-            <HStack justify='space-between'>
-                <Text fontFamily={'heading'} fontWeight={700} fontSize='md' color={'gray.500'}>{new Date(event.event.date.seconds * 1000).toLocaleDateString()}</Text>
-                <HStack>
+            <Stack direction='row' justify='space-between'>
+                <Text pt={2} fontFamily={'heading'} fontWeight={700} fontSize='md' color={'gray.500'}>{new Date(event.event.date.seconds * 1000).toLocaleDateString()}</Text>
+                <HStack pt={0}>
                     {userArray.length > icons! ? 
                         <Popover trigger='hover' placement='top' isLazy>
                             <PopoverTrigger>
@@ -102,7 +102,7 @@ export const EventItem = (event: any) => {
                         />}
 
                 </HStack>
-            </HStack>
+            </Stack>
             <Heading mb={3} fontSize={{base: 'xl', md: '2xl'}}>{event.event.title}</Heading>
             <Text fontSize={'md'} color={'gray.400'}>{event.event.description}</Text>
             <Text>{JSON.stringify(icons)}</Text>
