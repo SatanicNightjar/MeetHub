@@ -24,19 +24,17 @@ export const listenAllEvents = (callback: (event: QuerySnapshot<DocumentData>) =
 
 export const joinEvent = (creatorId: string, eventId: string, user: User) => {
 
-    return updateDoc(doc(db, 'users', creatorId, 'events', eventId), 'interested', {
-        [user.uid]: {
-            userId: user.uid,
-            displayName: user.displayName,
-            photoURL: user.photoURL,
-            isAnonymous: user.isAnonymous
-        }   
-    }, { merge: true });
+    return updateDoc(doc(db, 'users', creatorId, 'events', eventId), 'interested.'+user.uid, {
+        userId: user.uid,
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+        isAnonymous: user.isAnonymous
+    });
 
 }
 
 export const leaveEvent = (creatorId: string, eventId: string, user: User) => {
 
-    return updateDoc(doc(db, 'users', creatorId, 'events', eventId), 'interested.'+user.uid, deleteField(), { merge: true });
+    return updateDoc(doc(db, 'users', creatorId, 'events', eventId), 'interested.'+user.uid, deleteField());
 
 }
