@@ -59,7 +59,7 @@ export const EventItem = (event: any) => {
                 <Center paddingBottom='1'>
                     {user && <Button
                         onClick={() => (user_has_joined ? leaveEvent : joinEvent)(event.event.creatorId, event.event.id, user!)}
-                    >{user_has_joined ? "I'm not interested" : "I'm interested" }</Button>}
+                    >{user_has_joined ? "I'm not interested anymore" : "I'm interested" }</Button>}
                 </Center>
                 <Center>
                     <Box marginRight='1'>
