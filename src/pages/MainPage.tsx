@@ -50,7 +50,7 @@ export const EventItem = (event: any) => {
 
     const icons = useBreakpointValue({base: 1, sm: 2, md: 5, lg: 10, xl: 15});
 
-    const userArray = [...Object.values(event.event.interested)].sort((a:any, b:any) => a.userId.localeCompare(b.userId))
+    const userArray = event.event.interested ? [...Object.values(event.event.interested)].sort((a:any, b:any) => a.userId.localeCompare(b.userId)) : []
 
     return (
         <Box p={5} pt={4} overflow='initial'>
@@ -58,17 +58,15 @@ export const EventItem = (event: any) => {
             <HStack justify='space-between'>
                 <Text fontFamily={'heading'} fontWeight={700} fontSize='md' color={'gray.500'}>{new Date(event.event.date.seconds * 1000).toLocaleDateString()}</Text>
                 <HStack>
-                    
-                    
-
-                    {event.event.interested && userArray.length > 0 && 
-                            userArray.slice(0, icons).map((user: any) => <Image key={user.userId} src={user.photoURL} rounded='full' boxSize='6'/>) 
-                    }
-
-                    {userArray.length > icons! && 
+                    {userArray.length > icons! ? 
                         <Popover trigger='hover' placement='top' isLazy>
                             <PopoverTrigger>
-                                <Text fontSize='14' p='1' > +{userArray.length - icons!} </Text>
+                                
+                                <HStack>
+                                    {userArray.slice(0, icons).map((user: any) => <Image key={user.userId} src={user.photoURL} rounded='full' boxSize='6'/>) }
+                                    <Text fontSize='14' p='1' > +{userArray.length - icons!} </Text>
+                                </HStack>
+
                             </PopoverTrigger>
                             <PopoverContent>
                             <PopoverHeader pt={4} fontWeight="bold" border="0">
@@ -82,7 +80,12 @@ export const EventItem = (event: any) => {
                             </PopoverBody>
                             </PopoverContent>
                         </Popover>
+
+                    : userArray.length > 0 && 
+                        userArray.slice(0, icons).map((user: any) => <Image key={user.userId} src={user.photoURL} rounded='full' boxSize='6'/>) 
+                   
                     }
+                   
 
                     {user && <IconButton
                         aria-label="interested"
