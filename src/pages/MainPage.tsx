@@ -1,5 +1,5 @@
-import { AddIcon, MinusIcon, SmallAddIcon } from '@chakra-ui/icons';
-import { Box, Divider, Heading, Text, Button, Center, Image, HStack, Stack, IconButton } from '@chakra-ui/react';
+import { AddIcon, MinusIcon } from '@chakra-ui/icons';
+import { Box, Divider, Heading, Text, Image, HStack, Stack, IconButton } from '@chakra-ui/react';
 import { DocumentData } from 'firebase/firestore';
 import React, { useContext, useState } from 'react';
 import { useEffect } from 'react';
