@@ -65,7 +65,7 @@ export const EventItem = (event: any) => {
                     <Box marginRight='1'>
                         Interested users: 
                     </Box>
-                    {event.event.interested 
+                    {event.event.interested && Object.values(event.event.interested).length > 0
                         ? [...Object.values(event.event.interested)].sort((a:any, b:any) => a.userId.localeCompare(b.userId))
                             .map((user: any) => <Image key={user.userId} src={user.photoURL} rounded='full' boxSize='6'/>) 
                         : 'None'}
