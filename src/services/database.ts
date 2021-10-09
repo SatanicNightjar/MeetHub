@@ -30,16 +30,13 @@ export const joinEvent = (creatorId: string, eventId: string, user: User) => {
             displayName: user.displayName,
             photoURL: user.photoURL,
             isAnonymous: user.isAnonymous
-        }
-        
-    });
+        }   
+    }, { merge: true });
 
 }
 
 export const leaveEvent = (creatorId: string, eventId: string, user: User) => {
 
-    return updateDoc(doc(db, 'users', creatorId, 'events', eventId), 'interested.'+user.uid ,
-        deleteField()
-    );
+    return updateDoc(doc(db, 'users', creatorId, 'events', eventId), 'interested.'+user.uid, deleteField(), { merge: true });
 
 }
