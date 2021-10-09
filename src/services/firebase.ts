@@ -1,6 +1,4 @@
 import dotenv from 'dotenv';
-//import firebase from "firebase";
-//import 'firebase/compat/auth';
 
 import { initializeApp } from 'firebase/app'
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'

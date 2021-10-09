@@ -1,5 +1,5 @@
 import { User } from "firebase/auth";
-import { collection, collectionGroup, doc, setDoc, getDocs, onSnapshot, orderBy, query, QuerySnapshot, DocumentData } from "firebase/firestore";
+import { collection, collectionGroup, doc, setDoc, getDocs, onSnapshot, orderBy, query, QuerySnapshot, DocumentData, deleteField, updateDoc } from "firebase/firestore";
 import { db } from "./firebase";
 
 export const saveEvent = (user: User, event: object) => {
@@ -21,3 +21,25 @@ export const listenAllEvents = (callback: (event: QuerySnapshot<DocumentData>) =
         (snapshot) => (callback(snapshot))
     )
 )
+
+export const joinEvent = (creatorId: string, eventId: string, user: User) => {
+
+    return updateDoc(doc(db, 'users', creatorId, 'events', eventId), 'interested', {
+        [user.uid]: {
+            userId: user.uid,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+            isAnonymous: user.isAnonymous
+        }
+        
+    });
+
+}
+
+export const leaveEvent = (creatorId: string, eventId: string, user: User) => {
+
+    return updateDoc(doc(db, 'users', creatorId, 'events', eventId), 'interested.'+user.uid ,
+        deleteField()
+    );
+
+}
