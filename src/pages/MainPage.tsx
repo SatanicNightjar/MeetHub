@@ -1,4 +1,4 @@
-import { Box, Divider, Heading, Text, Button, Center, Image } from '@chakra-ui/react';
+import { Box, Divider, Heading, Text, Button, Center, Image, HStack } from '@chakra-ui/react';
 import { DocumentData } from 'firebase/firestore';
 import React, { useContext } from 'react';
 import { useEffect } from 'react';
@@ -62,13 +62,15 @@ export const EventItem = (event: any) => {
                     >{user_has_joined ? "I'm not interested anymore" : "I'm interested" }</Button>}
                 </Center>
                 <Center>
-                    <Box marginRight='1'>
+                    <HStack spacing='1'  >
+                    <Box alignContent='center' justifyContent='center'>
                         Interested users: 
                     </Box>
                     {event.event.interested && Object.values(event.event.interested).length > 0
                         ? [...Object.values(event.event.interested)].sort((a:any, b:any) => a.userId.localeCompare(b.userId))
                             .map((user: any) => <Image key={user.userId} src={user.photoURL} rounded='full' boxSize='6'/>) 
                         : 'None'}
+                    </HStack>
                 </Center>
             </Box>} 
         </Box>
