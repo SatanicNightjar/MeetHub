@@ -1,5 +1,5 @@
 import { AddIcon, MinusIcon } from '@chakra-ui/icons';
-import { Box, Divider, Heading, Text, Image, HStack, Stack, IconButton } from '@chakra-ui/react';
+import { Box, Divider, Heading, Text, Image, HStack, IconButton, useBreakpointValue, Popover, PopoverTrigger, PopoverHeader, PopoverContent, PopoverBody, WrapItem, Wrap, PopoverArrow } from '@chakra-ui/react';
 import { DocumentData } from 'firebase/firestore';
 import React, { useContext, useState } from 'react';
 import { useEffect } from 'react';
@@ -48,20 +48,45 @@ export const EventItem = (event: any) => {
 
     const [isLoading, setIsLoading] = useState(false);
 
+    const icons = useBreakpointValue({base: 1, sm: 2, md: 5, lg: 10, xl: 15});
+
+    const userArray = [...Object.values(event.event.interested)].sort((a:any, b:any) => a.userId.localeCompare(b.userId))
+
     return (
-        <Box p={5}>
+        <Box p={5} pt={4} overflow='initial'>
             
-            <Stack direction='row' justify='space-between'>
-                <Text fontFamily={'heading'} fontWeight={700} mb={3} fontSize='md' color={'gray.500'}>{new Date(event.event.date.seconds * 1000).toLocaleDateString()}</Text>
-                <HStack>{event.event.interested && Object.values(event.event.interested).length > 0
-                        ? [...Object.values(event.event.interested)].sort((a:any, b:any) => a.userId.localeCompare(b.userId))
-                            .map((user: any) => <Image key={user.userId} src={user.photoURL} rounded='full' boxSize='8'/>) 
-                        : 'None'}
+            <HStack justify='space-between'>
+                <Text fontFamily={'heading'} fontWeight={700} fontSize='md' color={'gray.500'}>{new Date(event.event.date.seconds * 1000).toLocaleDateString()}</Text>
+                <HStack>
+                    
+                    
+
+                    {event.event.interested && userArray.length > 0 && 
+                            userArray.slice(0, icons).map((user: any) => <Image key={user.userId} src={user.photoURL} rounded='full' boxSize='6'/>) 
+                    }
+
+                    {userArray.length > icons! && 
+                        <Popover trigger='hover' placement='top' isLazy>
+                            <PopoverTrigger>
+                                <Text fontSize='14' p='1' > +{userArray.length - icons!} </Text>
+                            </PopoverTrigger>
+                            <PopoverContent>
+                            <PopoverHeader pt={4} fontWeight="bold" border="0">
+                                Interested Users
+                            </PopoverHeader>
+                            <PopoverArrow />
+                            <PopoverBody>
+                                <Wrap>
+                                    {userArray.map((user: any, idx) => <WrapItem key={user.userId+idx} ><Image src={user.photoURL} rounded='full' boxSize='6'/></WrapItem>) }
+                                </Wrap> 
+                            </PopoverBody>
+                            </PopoverContent>
+                        </Popover>
+                    }
 
                     {user && <IconButton
                         aria-label="interested"
                         icon={user_has_joined ? <MinusIcon />  : <AddIcon />} 
-                        alt=''
                         isRound={true}
                         size='sm'
                         variant='ghost'
@@ -74,9 +99,10 @@ export const EventItem = (event: any) => {
                         />}
 
                 </HStack>
-            </Stack>
+            </HStack>
             <Heading mb={3} fontSize={{base: 'xl', md: '2xl'}}>{event.event.title}</Heading>
             <Text fontSize={'md'} color={'gray.400'}>{event.event.description}</Text>
+            <Text>{JSON.stringify(icons)}</Text>
 
         </Box>
     )
