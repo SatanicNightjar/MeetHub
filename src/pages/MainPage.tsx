@@ -58,20 +58,20 @@ export const EventItem = (event: any) => {
                             .map((user: any) => <Image key={user.userId} src={user.photoURL} rounded='full' boxSize='8'/>) 
                         : 'None'}
 
-                    <IconButton
+                    {user && <IconButton
                         aria-label="interested"
                         icon={user_has_joined ? <MinusIcon />  : <AddIcon />} 
                         alt=''
                         isRound={true}
                         size='sm'
                         variant='ghost'
+                        isLoading={isLoading}
                         onClick={() => {
                             user_has_joined ? leaveEvent(event.event.creatorId, event.event.id, user!) : joinEvent(event.event.creatorId, event.event.id, user!)
                             setIsLoading(true);
                             setTimeout(() => setIsLoading(false), 500);
                         }}
-                        isLoading={isLoading}
-                        />
+                        />}
 
                 </HStack>
             </Stack>
