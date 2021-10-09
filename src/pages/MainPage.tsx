@@ -1,6 +1,7 @@
-import { Box, Divider, Heading, Text, Button, Center, Image, HStack } from '@chakra-ui/react';
+import { AddIcon, MinusIcon, SmallAddIcon } from '@chakra-ui/icons';
+import { Box, Divider, Heading, Text, Button, Center, Image, HStack, Stack, IconButton } from '@chakra-ui/react';
 import { DocumentData } from 'firebase/firestore';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useEffect } from 'react';
 import { Virtuoso } from 'react-virtuoso';
 import { UserContext } from '../providers/UserProvider';
@@ -45,34 +46,38 @@ export const EventItem = (event: any) => {
 
     const user_has_joined = user && event.event.interested && Object.keys(event.event.interested).includes(user.uid)
 
-    const debug = true;
-
+    const [isLoading, setIsLoading] = useState(false);
 
     return (
         <Box p={5}>
-            <Text fontFamily={'heading'} fontWeight={700} mb={3} fontSize='md' color={'gray.500'}>{new Date(event.event.date.seconds * 1000).toLocaleDateString()}</Text>
+            
+            <Stack direction='row' justify='space-between'>
+                <Text fontFamily={'heading'} fontWeight={700} mb={3} fontSize='md' color={'gray.500'}>{new Date(event.event.date.seconds * 1000).toLocaleDateString()}</Text>
+                <HStack>{event.event.interested && Object.values(event.event.interested).length > 0
+                        ? [...Object.values(event.event.interested)].sort((a:any, b:any) => a.userId.localeCompare(b.userId))
+                            .map((user: any) => <Image key={user.userId} src={user.photoURL} rounded='full' boxSize='8'/>) 
+                        : 'None'}
+
+                    <IconButton
+                        aria-label="interested"
+                        icon={user_has_joined ? <MinusIcon />  : <AddIcon />} 
+                        alt=''
+                        isRound={true}
+                        size='sm'
+                        variant='ghost'
+                        onClick={() => {
+                            user_has_joined ? leaveEvent(event.event.creatorId, event.event.id, user!) : joinEvent(event.event.creatorId, event.event.id, user!)
+                            setIsLoading(true);
+                            setTimeout(() => setIsLoading(false), 500);
+                        }}
+                        isLoading={isLoading}
+                        />
+
+                </HStack>
+            </Stack>
             <Heading mb={3} fontSize={{base: 'xl', md: '2xl'}}>{event.event.title}</Heading>
             <Text fontSize={'md'} color={'gray.400'}>{event.event.description}</Text>
-            
-            {/* TODO: remove this */}
-            {debug && <Box borderWidth='1px' borderRadius='lg' padding='2' >
-                <Center paddingBottom='1'>
-                    {user && <Button
-                        onClick={() => (user_has_joined ? leaveEvent : joinEvent)(event.event.creatorId, event.event.id, user!)}
-                    >{user_has_joined ? "I'm not interested anymore" : "I'm interested" }</Button>}
-                </Center>
-                <Center>
-                    <HStack spacing='1'  >
-                    <Box alignContent='center' justifyContent='center'>
-                        Interested users: 
-                    </Box>
-                    {event.event.interested && Object.values(event.event.interested).length > 0
-                        ? [...Object.values(event.event.interested)].sort((a:any, b:any) => a.userId.localeCompare(b.userId))
-                            .map((user: any) => <Image key={user.userId} src={user.photoURL} rounded='full' boxSize='6'/>) 
-                        : 'None'}
-                    </HStack>
-                </Center>
-            </Box>} 
+
         </Box>
     )
 }
