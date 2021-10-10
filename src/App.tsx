@@ -19,7 +19,11 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <UserProvider>
-        <Box w='100%' padding='5em 20% 5em 20%'>
+        {/* <Box w='100%' padding='5em 20% 5em 20%'> */}
+        <Box w='100%' padding={{
+          base: '5em 1em 5em 1em',
+          md: '5em 20% 5em 20%'
+          }}>
         <Heading size='2xl' orientation='horizontal'>MeetHub</Heading>
         
           <HashRouter>

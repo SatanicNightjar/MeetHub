@@ -2,8 +2,9 @@ import React, { useContext, useEffect } from 'react';
 import { Box, Button, Center, FormControl, FormLabel, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Stack, Textarea } from '@chakra-ui/react';
 import { SingleDatepicker } from '../components/DatePicker'
 import { UserContext } from '../providers/UserProvider';
-import { getAllEvents, getOwnEvents, listenAllEvents, saveEvent } from '../services/database';
+import { listenAllEvents, saveEvent } from '../services/database';
 import { Login } from '../Login';
+import { useHistory } from 'react-router';
 
 
 // Titel, desc, datum, creator, number of people? (min max),
@@ -17,6 +18,8 @@ export const CreatePage = () => {
     const [numberOfPeopleMax, setNumberOfPeopleMax] = React.useState(10);
 
     const user = useContext(UserContext);
+
+    const history = useHistory();
 
     useEffect(() => {
         listenAllEvents(e => {
@@ -34,6 +37,7 @@ export const CreatePage = () => {
                         event.preventDefault();
                         console.log({title: title, description: description, date: date, creator: creator, numberOfPeopleMin: numberOfPeopleMin, numberOfPeopleMax: numberOfPeopleMax})
                         user && saveEvent(user, {title: title, description: description, date: date, creator: creator, numberOfPeopleMin: numberOfPeopleMin, numberOfPeopleMax: numberOfPeopleMax});
+                        history.push('/');
                     }}>
 
                     <FormControl isRequired id="createEvent" >
@@ -85,27 +89,7 @@ export const CreatePage = () => {
     </div>}
 
             </Box>
-            <Button
-                mt={4}
-                colorScheme="teal"
-                type="submit"
-                onClick={() => {
-                    getOwnEvents(user!).then(events => console.log(events.docs.map(doc => doc.data())));
-                }}
-            >
-                Create Event
-            </Button>
-
-            <Button
-                mt={4}
-                colorScheme="teal"
-                type="submit"
-                onClick={() => {
-                    getAllEvents().then(events => console.log(events.docs.map(doc => doc.data())));
-                }}
-            >
-                Create Event
-            </Button>
+            
         </div>
     );
 };

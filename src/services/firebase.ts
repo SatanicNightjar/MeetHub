@@ -1,9 +1,7 @@
 import dotenv from 'dotenv';
-//import firebase from "firebase";
-//import 'firebase/compat/auth';
 
 import { initializeApp } from 'firebase/app'
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, signInAnonymously as _signInAnonymously } from 'firebase/auth'
 import { getFirestore } from "firebase/firestore";
 
 dotenv.config();
@@ -23,6 +21,12 @@ export const db = getFirestore();
 const googleProvider = new GoogleAuthProvider()
 export const signInWithGoogle = () => {
   return signInWithPopup(auth, googleProvider).catch((error) => {
+    console.log(error.message);
+  })
+}
+
+export const signInAnonymously = () => {
+  return _signInAnonymously(auth).catch((error) => {
     console.log(error.message);
   })
 }
