@@ -1,8 +1,9 @@
 import { AddIcon, MinusIcon } from '@chakra-ui/icons';
-import { Box, Divider, Heading, Text, Image, HStack, IconButton, useBreakpointValue, Popover, PopoverTrigger, PopoverHeader, PopoverContent, PopoverBody, WrapItem, Wrap, PopoverArrow, Stack } from '@chakra-ui/react';
+import { Box, Divider, Heading, Text, Image, HStack, IconButton, useBreakpointValue, Popover, PopoverTrigger, PopoverHeader, PopoverContent, PopoverBody, WrapItem, Wrap, PopoverArrow, Stack, Button } from '@chakra-ui/react';
 import { DocumentData } from 'firebase/firestore';
 import React, { useContext, useState } from 'react';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Virtuoso } from 'react-virtuoso';
 import { UserContext } from '../providers/UserProvider';
 import { joinEvent, leaveEvent, listenAllEvents } from '../services/database';
@@ -20,7 +21,14 @@ export const MainPage = () => {
 
     return (
         <div>
-            <Heading fontWeight='medium' mt='5' size='lg'>All Events</Heading>
+            <Stack direction='row' justify='space-between' align='end' >
+                <Heading fontWeight='medium' mt='5' size='lg'>All Events</Heading>
+                <Button 
+                    as={Link}
+                    variant='outline'
+                    to='/create'
+                    >Create Event</Button>
+            </Stack>
             
             <Box borderWidth='1px' borderRadius='lg' padding='0' marginTop='2'>
             
@@ -48,7 +56,12 @@ export const EventItem = (event: any) => {
 
     const [isLoading, setIsLoading] = useState(false);
 
-    const icons = useBreakpointValue({base: 1, sm: 2, md: 5, lg: 10, xl: 15});
+    const icons = useBreakpointValue({
+        base: 2, 
+        sm: 4, 
+        md: 5, 
+        lg: 10, 
+        xl: 15});
 
     const userArray = event.event.interested ? [...Object.values(event.event.interested)].sort((a:any, b:any) => a.userId.localeCompare(b.userId)) : []
 
@@ -64,7 +77,7 @@ export const EventItem = (event: any) => {
                                 
                                 <HStack>
                                     {userArray.slice(0, icons).map((user: any) => <Image key={user.userId} src={user.photoURL} rounded='full' boxSize='6'/>) }
-                                    <Text fontSize='14' p='1' > +{userArray.length - icons!} </Text>
+                                    <Text fontSize='14' p='1' >+{userArray.length - icons!} </Text>
                                 </HStack>
 
                             </PopoverTrigger>
@@ -75,7 +88,11 @@ export const EventItem = (event: any) => {
                             <PopoverArrow />
                             <PopoverBody>
                                 <Wrap>
-                                    {userArray.map((user: any, idx) => <WrapItem key={user.userId+idx} ><Image src={user.photoURL} rounded='full' boxSize='6'/></WrapItem>) }
+                                    {userArray.map((user: any, idx) => 
+                                        <WrapItem key={user.userId+idx}>
+                                            <Image src={user.photoURL} rounded='full' boxSize='6'/>
+                                        </WrapItem>
+                                    )}
                                 </Wrap> 
                             </PopoverBody>
                             </PopoverContent>
