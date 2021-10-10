@@ -1,10 +1,10 @@
 import { Button } from '@chakra-ui/button';
-import { Box, Divider } from '@chakra-ui/layout';
+import { Box, Center, Divider } from '@chakra-ui/layout';
 import React, { useContext, useEffect, useState } from 'react';
 import { Login } from '../Login';
 import { UserContext } from '../providers/UserProvider';
-import { getAllEvents } from '../services/database';
-import { logOut } from '../services/firebase';
+import { getAllEvents, getOwnEvents } from '../services/database';
+import { logOut, signInAnonymously } from '../services/firebase';
 
 export const Debug = () => {
 
@@ -21,7 +21,43 @@ export const Debug = () => {
     return (
         <Box borderWidth='1px' borderRadius='lg' padding='2' margin='5em'>
             <h1>Log in</h1> <br/>
-            <Login />
+            <Center>
+                <Login />
+            </Center>
+            <Divider margin='2em 0 2em 0' />
+
+            <h1>Anyonmous Login</h1> <br/>
+            <Button
+                alignSelf='center'
+                leftIcon={<img src={"https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/24px-Google_%22G%22_Logo.svg.png"} alt=''/>}
+                onClick={signInAnonymously}
+                isFullWidth={true}>
+                Anonymously
+                </Button>
+            <Divider margin='2em 0 2em 0' />
+
+            <h1>Events</h1>
+            <Button
+                mt={4}
+                type="submit"
+                isFullWidth={true}
+                onClick={() => {
+                    getOwnEvents(user!).then(events => console.log(events.docs.map(doc => doc.data())));
+                }}
+            >
+                Print My Events
+            </Button>
+
+            <Button
+                mt={4}
+                type="submit"
+                isFullWidth={true}
+                onClick={() => {
+                    getAllEvents().then(events => console.log(events.docs.map(doc => doc.data())));
+                }}
+            >
+                Print All Events
+            </Button>
             <Divider margin='2em 0 2em 0' />
 
             <h1>Logged in user:</h1> <br/>
