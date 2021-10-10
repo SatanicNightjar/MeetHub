@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Box, Button, Center, FormControl, FormLabel, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Stack, Textarea } from '@chakra-ui/react';
-import { DatePicker } from '@orange_digital/chakra-datepicker';
+import { SingleDatepicker } from '../components/DatePicker'
 import { UserContext } from '../providers/UserProvider';
 import { getAllEvents, getOwnEvents, listenAllEvents, saveEvent } from '../services/database';
 import { Login } from '../Login';
@@ -42,7 +42,7 @@ export const CreatePage = () => {
                         <FormLabel>Description</FormLabel>
                         <Textarea onChange={(event) => setDescription(event.target.value)}/>
                         <FormLabel>Date</FormLabel>
-                        <DatePicker initialValue={new Date()} onDateChange={value => value && setDate(value)}/>
+                        <SingleDatepicker date={date} onDateChange={value => setDate(value)}/>
                         <FormLabel>Creator</FormLabel>
                         <Input type="text" onChange={(event) => setCreator(event.target.value)}/>
                         <FormLabel>Number of people</FormLabel>
