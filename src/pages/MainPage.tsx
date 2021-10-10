@@ -16,7 +16,11 @@ export const MainPage = () => {
     const [events, setEvents] = React.useState<DocumentData[]>([]);
 
     useEffect(() => {
-        listenAllEvents(events => setEvents(events.docs.map(doc => ({...doc.data(), id: doc.id, creatorId: doc.ref.parent.parent?.id}))));
+        listenAllEvents(events => setEvents(
+            events.docs
+            .map(doc => 
+                ({...doc.data(), id: doc.id, creatorId: doc.ref.parent.parent?.id}))
+            .sort((a:any, b:any) => a.date.seconds - b.date.seconds))) // TODO: remove this once index is built
     }, []);
 
     return (

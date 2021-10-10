@@ -11,12 +11,14 @@ export const getOwnEvents = (user: User) => {
 }
 
 export const getAllEvents = () => {
-    return getDocs(query(collectionGroup(db, 'events'), orderBy('date')));
+    //return getDocs(query(collectionGroup(db, 'events'), orderBy('date')));
+    return getDocs(collectionGroup(db, 'events'));
 }
 
 export const listenAllEvents = (callback: (event: QuerySnapshot<DocumentData>) => void) => (
     onSnapshot(
-        query(collectionGroup(db, 'events'), orderBy('date')),
+        //query(collectionGroup(db, 'events'), orderBy('date')),
+        collectionGroup(db, 'events'),
         (snapshot) => (callback(snapshot))
     )
 )
