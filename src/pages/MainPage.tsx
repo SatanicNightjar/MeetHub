@@ -105,7 +105,6 @@ export const EventItem = (event: any) => {
             </Stack>
             <Heading mb={3} fontSize={{base: 'xl', md: '2xl'}}>{event.event.title}</Heading>
             <Text fontSize={'md'} color={'gray.400'}>{event.event.description}</Text>
-            <Text>{JSON.stringify(icons)}</Text>
 
         </Box>
     )
