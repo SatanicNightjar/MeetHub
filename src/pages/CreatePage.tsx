@@ -52,15 +52,15 @@ export const CreatePage = () => {
                         <FormLabel>Number of people</FormLabel>
                         
                         <Stack isInline>
-                            <NumberInput defaultValue={2} min={2} max={100}>
-                                <NumberInputField onChange={(event) => setNumberOfPeopleMin(+event.target.value)}/>
+                            <NumberInput defaultValue={2} min={2} max={numberOfPeopleMax} onChange={(valueString, valueNumber) => setNumberOfPeopleMin(valueNumber)}>
+                                <NumberInputField />
                                 <NumberInputStepper>
                                     <NumberIncrementStepper />
                                     <NumberDecrementStepper />
                                 </NumberInputStepper>
                             </NumberInput>
-                            <NumberInput defaultValue={10} min={2} max={100}>
-                                <NumberInputField onChange={(event) => setNumberOfPeopleMax(+event.target.value)}/>
+                            <NumberInput defaultValue={10} min={numberOfPeopleMin} max={100} onChange={(valueString, valueNumber) => setNumberOfPeopleMax(valueNumber)}>
+                                <NumberInputField />
                                 <NumberInputStepper>
                                     <NumberIncrementStepper />
                                     <NumberDecrementStepper />
