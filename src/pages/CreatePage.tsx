@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Box, Button, Center, FormControl, FormLabel, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Stack, Textarea } from '@chakra-ui/react';
+import { Box, Button, Center, FormControl, FormLabel, Heading, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Stack, Textarea } from '@chakra-ui/react';
 import { SingleDatepicker } from '../components/DatePicker'
 import { UserContext } from '../providers/UserProvider';
 import { listenAllEvents, saveEvent } from '../services/database';
@@ -29,8 +29,8 @@ export const CreatePage = () => {
 
     return (
         <div>
-            <h1>Create Page</h1>
-            <Box borderWidth='1px' borderRadius='lg' padding='2'>
+            <Heading fontWeight='medium' mt='5' size='lg'>Create Page</Heading>
+            <Box borderWidth='1px' borderRadius='lg' padding='5' mt='2'>
                 {user ? 
                 <form 
                     onSubmit={(event) => {
@@ -40,16 +40,16 @@ export const CreatePage = () => {
                         history.push('/');
                     }}>
 
-                    <FormControl isRequired id="createEvent" >
+                    <FormControl isRequired id="createEvent">
                         <FormLabel>Title</FormLabel>
                         <Input type="text" onChange={(event) => setTitle(event.target.value)}/>
-                        <FormLabel>Description</FormLabel>
+                        <FormLabel mt='5'>Description</FormLabel>
                         <Textarea onChange={(event) => setDescription(event.target.value)}/>
-                        <FormLabel>Date</FormLabel>
+                        <FormLabel mt='5'>Date</FormLabel>
                         <SingleDatepicker date={date} onDateChange={value => setDate(value)}/>
-                        <FormLabel>Creator</FormLabel>
+                        <FormLabel mt='5'>Creator</FormLabel>
                         <Input type="text" onChange={(event) => setCreator(event.target.value)}/>
-                        <FormLabel>Number of people</FormLabel>
+                        <FormLabel mt='5'>Number of people</FormLabel>
                         
                         <Stack isInline>
                             <NumberInput defaultValue={2} min={2} max={numberOfPeopleMax} onChange={(valueString, valueNumber) => setNumberOfPeopleMin(valueNumber)}>
@@ -69,7 +69,7 @@ export const CreatePage = () => {
                         </Stack>
                         
                         <Button
-                            mt={4}
+                            mt={10}
                             colorScheme="teal"
                             type="submit"
                         >
